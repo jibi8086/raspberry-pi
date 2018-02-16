@@ -12,6 +12,7 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 #Declare GPIO Port
 lcd_rs        = 18
@@ -71,15 +72,16 @@ def copy(src_dev, dest_dev):
       time.sleep(2)
     elif input_state2 == False:
       if src_size < dest_available:
-       # lcd.message("copy")
+       lcd.message("Select File")
+       lcd.cl
        stdout=execute("cp -r {} {}".format(src_mnt, dest_mnt))
-       stdout=execute("rm -rf {}" .format(dest_mnt))
+       #stdout=execute("rm -rf {}" .format(dest_mnt))
        lcd.clear()
        lcd.message("completed")
        time.sleep(3)
     else:
       lcd.message("enter button")
-      time.sleep(1)
+      time.sleep(0.5)
       lcd.clear();
     umount_src_stdout = execute("umount {}".format(src_dev))
     umount_dest_stdout = execute("umount {}".format(dest_dev))
