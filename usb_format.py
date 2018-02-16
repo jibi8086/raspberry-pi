@@ -73,16 +73,17 @@ def copy(src_dev, dest_dev):
     elif input_state2 == False:
       if src_size < dest_available:
        lcd.message("Select File")
-       lcd.cl
+       time.sleep(0.5)
        stdout=execute("cp -r {} {}".format(src_mnt, dest_mnt))
        #stdout=execute("rm -rf {}" .format(dest_mnt))
        lcd.clear()
        lcd.message("completed")
        time.sleep(3)
-    else:
-      lcd.message("enter button")
-      time.sleep(0.5)
-      lcd.clear();
+    #elif :
+     # lcd.message("enter button")
+      #flag=1
+      #time.sleep(0.5)
+      #lcd.clear();
     umount_src_stdout = execute("umount {}".format(src_dev))
     umount_dest_stdout = execute("umount {}".format(dest_dev))
     #shutil.rmtree(src_mnt)
@@ -114,7 +115,8 @@ def main():
             copy(src_dev, dest_dev)
             break
 while True:
-     main()
+     flag=0
      lcd.clear()
-
+     lcd.message("Enter Button")
+     main()
      # print("print")
