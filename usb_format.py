@@ -64,6 +64,9 @@ def copy(src_dev, dest_dev):
     dest_available = _execute("df {} | awk 'NR > 1 {{ print $4 }}'".format(dest_mnt))
     input_state1 = GPIO.input(19)
     input_state2 = GPIO.input(26)
+    input_state2 = GPIO.input(26)
+    
+    
     if input_state1 == False:
       #lcd.message("formatting")
       stdout=execute("rm -rf {}" .format(dest_mnt))
