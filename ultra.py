@@ -23,8 +23,14 @@ pulse_duration = pulse_end - pulse_start
 distance = pulse_duration * 17150
 distance = round(distance, 2)
 print ("Distance:",distance,"cm")
-if distance>10:
-  test = 'sanal test ultra'
-  userdata = {"firstname": test, "lastname": distance, "password": "jdoe123"}
+if distance>2:
+  Sensordistance = distance
+  userdata = {"distance": Sensordistance,"state":"critical"}
   resp = requests.post('https://jibin8086.000webhostapp.com/Image/python_test.php', params=userdata)
   print("success")
+ elif distance>5:
+  Sensordistance = distance
+  userdata = {"distance": Sensordistance,"state":"half fill"}
+  resp = requests.post('https://jibin8086.000webhostapp.com/Image/python_test.php', params=userdata)
+  print("success")
+  
