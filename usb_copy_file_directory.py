@@ -124,6 +124,10 @@ def copy(src_dev, dest_dev):
                  else:
                     lcd.message("Memmory Full")
                     time.sleep(1)
+		    lcd.message("please format")
+		    time.sleep(1)
+		    lcd.clear()
+		    main()
 		    break
 #	except:
 #		main()
