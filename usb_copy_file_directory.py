@@ -116,7 +116,7 @@ def copy(src_dev, dest_dev):
 		                lcd.clear()
                        	        #continue
     	            elif GPIO.input(13)==0:
-			    if(len(file))>=i:
+			    if(len(file))>i:
 	            	   	 i=i+1
 			   	 print(i)
 			       	 time.sleep(1)
