@@ -1,4 +1,5 @@
 #https://thingsboard.io/docs/samples/raspberry/temperature/
+##https://tutorials-raspberrypi.com/raspberry-pi-mqtt-broker-client-wireless-communication/
 import os
 import time
 import sys
