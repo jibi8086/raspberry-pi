@@ -49,7 +49,7 @@ def Redlight(delay):
 	        text = msg.as_string()
 	        server =smtplib.SMTP('smtp.gmail.com',587)
 	        server.starttls()
-	        server.login(email_user,'8086747217')
+	        server.login(email_user,'********')
 	        server.sendmail(email_user,email_send,text)
 	        server.quit()
 	        camera.close()
