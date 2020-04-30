@@ -1,0 +1,12 @@
+Algorithm
+
+Step 1: Start
+Step 2: Set Date and time in Lcd Display
+Step 3: If Button pressed
+		Goto Step 4
+	Else
+		Goto step 2
+Step 4:get the current location
+Step 5:current location and user information send to authorized authority
+step 6:tTacke the video and store to sd card
+step7:goto step 1 //Repeat the process
