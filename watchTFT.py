@@ -10,27 +10,55 @@ from time import sleep
 import time
 import picamera #Import Camera
 import Adafruit_ADS1x15
+import Image
+import ImageDraw
+import ImageFont
+ 
+import Adafruit_ILI9341 as TFT
+import Adafruit_GPIO as GPIO
+import Adafruit_GPIO.SPI as SPI
+ 
+ 
+# Raspberry Pi configuration.
+DC = 18
+RST = 23
+SPI_PORT = 0
+SPI_DEVICE = 0
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GAIN = 1
 pin = 4
-# Modify this if you have a different sized character LCD
-lcd_columns = 16
-lcd_rows = 2
+ 
+# BeagleBone Black configuration.
+# DC = 'P9_15'
+# RST = 'P9_12'
+# SPI_PORT = 1
+# SPI_DEVICE = 0
+ 
+# Create TFT LCD display class.
+disp = TFT.ILI9341(DC, rst=RST, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=64000000))
+ 
+# Initialize display.
+disp.begin()
+disp.clear((255, 0, 0))
+draw = disp.draw()
 
-# compatible with all versions of RPI as of Jan. 2019
-# v1 - v3B+
-lcd_rs = digitalio.DigitalInOut(board.D22)
-lcd_en = digitalio.DigitalInOut(board.D17)
-lcd_d4 = digitalio.DigitalInOut(board.D25)
-lcd_d5 = digitalio.DigitalInOut(board.D24)
-lcd_d6 = digitalio.DigitalInOut(board.D23)
-lcd_d7 = digitalio.DigitalInOut(board.D18)
+
+def draw_rotated_text(image, text, position, angle, font, fill=(255,255,255)):
+	# Get rendered font width and height.
+	draw = ImageDraw.Draw(image)
+	width, height = draw.textsize(text, font=font)
+	# Create a new image with transparent background to store the text.
+	textimage = Image.new('RGBA', (width, height), (0,0,0,0))
+	# Render the text.
+	textdraw = ImageDraw.Draw(textimage)
+	textdraw.text((0,0), text, font=font, fill=fill)
+	# Rotate the text image.
+	rotated = textimage.rotate(angle, expand=1)
+	# Paste the text into the image, using it as a mask for transparency.
+	image.paste(rotated, position, rotated)
 
 
-# Initialise the lcd class
-lcd = characterlcd.Character_LCD_Mono(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6,
-                                      lcd_d7, lcd_columns, lcd_rows)
 
 # looking for an active Ethernet or WiFi device
 def find_interface(): # find the Ip address
@@ -56,8 +84,8 @@ def readData(): #Take video and sent Email
 			print("Completed")
 		sleep(0.2)
 	except Exception as e:
-		lcd.clear()
-		lcd.message("Enable Network")
+		disp.clear((255, 0, 0))
+		draw_rotated_text(disp.buffer, 'Enable Network', (150, 120), 90, font, fill=(255,255,255))		
 		print(e)
 # find an active IP on the first LIVE network device
 def parse_ip():
@@ -98,8 +126,9 @@ def start():
     lcd_line_2 = "IP " 
 
     # combine both lines into one update to the display
-    lcd.message = lcd_line_1 + lcd_line_2
 
+    draw_rotated_text(disp.buffer, lcd_line_1 + lcd_line_2, (150, 120), 90, font, fill=(255,255,255))
+    disp.display()
     sleep(2)
 
 while True: # Execution start
