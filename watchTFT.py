@@ -5,7 +5,6 @@ from time import sleep
 from datetime import datetime
 import board
 import digitalio
-import adafruit_character_lcd.character_lcd as characterlcd
 from time import sleep
 import time
 import picamera #Import Camera
@@ -17,7 +16,12 @@ import ImageFont
 import Adafruit_ILI9341 as TFT
 import Adafruit_GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
- 
+
+import serial
+
+SERIAL_PORT = "/dev/serial0"
+running = True	
+gps = serial.Serial(SERIAL_PORT, baudrate = 9600, timeout = 0.5)
  
 # Raspberry Pi configuration.
 DC = 18
@@ -58,6 +62,26 @@ def draw_rotated_text(image, text, position, angle, font, fill=(255,255,255)):
 	# Paste the text into the image, using it as a mask for transparency.
 	image.paste(rotated, position, rotated)
 
+def getPositionData(gps):
+    data = gps.readline()
+    message = data[0:6]
+    if (message == "$GPRMC"):
+        # GPRMC = Recommended minimum specific GPS/Transit data
+        # Reading the GPS fix data is an alternative approach that also works
+        parts = data.split(",")
+        if parts[2] == 'V':
+            # V = Warning, most likely, there are no satellites in view...
+            print "GPS receiver warning"
+        else:
+            # Get the position data that was transmitted with the GPRMC message
+            # In this example, I'm only interested in the longitude and latitude
+            # for other values, that can be read, refer to: http://aprs.gids.nl/nmea/#rmc
+            longitude = formatDegreesMinutes(parts[5], 3)
+            latitude = formatDegreesMinutes(parts[3], 2)
+	    return "Your position: lon = " + str(longitude) + ", lat = " + str(latitude)
+    else:
+        # Handle other NMEA messages and unsupported strings
+        pass
 
 
 # looking for an active Ethernet or WiFi device
@@ -73,7 +97,7 @@ def readData(): #Take video and sent Email
 		if(True): # button pressed
 			fromaddr = 'From mailId@gmail.com'
 			toaddrs = 'To mail id@gmail.com'
-			msg = "Hi,\n Your friend is critical stage \n\n Name:Dhavood \n Status:Critical\n HeartBeat:"+str(pulseFinal)+"\n Temperature:"+str(temp)+"\n\n With thanks and regards\n Smart Watch Team"
+			msg = ""+getPositionData(gps)
 			username = 'jibin8087@gmail.com'
 			password = '**********'
 			server = smtplib.SMTP('smtp.gmail.com:587')
@@ -105,7 +129,6 @@ def run_cmd(cmd):
     return output.decode('ascii')
 
 # wipe LCD screen before we start
-lcd.clear()
 
 
 def TakeVideo(): #Start video Recording
