@@ -10,11 +10,11 @@ import Image #import image
 import ImageDraw #import ImageDraw
 import ImageFont #import ImageFont
  
-import Adafruit_ILI9341 as TFT 
-import Adafruit_GPIO as GPIO
-import Adafruit_GPIO.SPI as SPI
+import Adafruit_ILI9341 as TFT # Import TFT Display
+import Adafruit_GPIO as GPIO # Import GPIO for Enabling TFT Display
+import Adafruit_GPIO.SPI as SPI # Import GPIO.SPI for enable circut connection
 
-import serial
+import serial #Enable Serial Communication
 
 SERIAL_PORT = "/dev/serial0"
 running = True	
