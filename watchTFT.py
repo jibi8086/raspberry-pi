@@ -129,9 +129,9 @@ def TakeVideo(): #Start video Recording
     camera.stop_recording()
 
 def start():
-    if GPIO.input(21)==0:
+    if GPIO.input(21)==0: #check button pressed or not
         print("Button Pressed") #Person pressed emergency button
-        readData()
+        readData() # call method readData
     # date and time
     lcd_line_1 = datetime.now().strftime('%b %d  %H:%M:%S\n') #Show the date and time
 
@@ -140,12 +140,12 @@ def start():
 
     # combine both lines into one update to the display
 
-    draw_rotated_text(disp.buffer, lcd_line_1 + lcd_line_2, (150, 120), 90, font, fill=(255,255,255))
-    disp.display()
-    sleep(2)
+    draw_rotated_text(disp.buffer, lcd_line_1 + lcd_line_2, (150, 120), 90, font, fill=(255,255,255)) #Print date and time
+    disp.display() #show the above data into display
+    sleep(2) # delay 2 second for load the data to screen
 
 while True: # Execution start
 	try:
-		start()
+		start() #Call function start
 	except Exception as e:
-		print(e)
+		print(e) # print exception
