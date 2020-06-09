@@ -1,6 +1,5 @@
 import smtplib # import SMTP protocol
 import RPi.GPIO as GPIO # Enable Gpio port
-from subprocess import Popen, PIPE #Import mail
 from time import sleep #import time
 from datetime import datetime #import datetime
 import board #import raspberry pi board
