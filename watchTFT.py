@@ -76,8 +76,8 @@ def getPositionData(gps):
 
 # looking for an active Ethernet or WiFi device
 def find_interface(): # find the Ip address
-    find_device = "ip addr show"
-    interface_parse = run_cmd(find_device)
+    find_device = "ip addr show" # find the ip address
+    interface_parse = run_cmd(find_device) # find the mac address
     for line in interface_parse.splitlines():
         if "state UP" in line:
             dev_name = line.split(':')[1]
@@ -122,11 +122,11 @@ def run_cmd(cmd):
 
 
 def TakeVideo(): #Start video Recording
-    camera = picamera.PiCamera()	
-    camera.capture("/home/pi/Desktop/new/test2.jpg")
-    camera.start_recording("./home/pi/Desktop/new")
-    sleep(10)
-    camera.stop_recording()
+    camera = picamera.PiCamera()	#Enable camara
+    camera.capture("/home/pi/Desktop/new/test2.jpg") #capture image
+    camera.start_recording("./home/pi/Desktop/new") #start recording
+    sleep(10) #Set delay for 10 seconds
+    camera.stop_recording()# stop recording
 
 def start():
     if GPIO.input(21)==0: #check button pressed or not
