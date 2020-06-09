@@ -142,3 +142,4 @@ while True: # Execution start
 		start() #Call function start
 	except Exception as e:
 		print(e) # print exception
+		start() #Again Call function start
