@@ -85,17 +85,17 @@ def find_interface(): # find the Ip address
 def readData(): #Take video and sent Email
 	try: # handle Exception
 		if(True): # button pressed
-			fromaddr = 'From mailId@gmail.com'
-			toaddrs = 'To mail id@gmail.com'
-			msg = ""+getPositionData(gps)
-			username = 'jibin8087@gmail.com'
-			password = '**********'
-			server = smtplib.SMTP('smtp.gmail.com:587')
-			server.starttls()
-			server.login(username,password)
-			server.sendmail(fromaddr, toaddrs, msg)
-			server.quit()
-			print("Completed")
+			fromaddr = 'FrommailId@gmail.com' # from maild address
+			toaddrs = 'TomailId@gmail.com' # To maild address
+			msg = ""+getPositionData(gps) #call function for get the location
+			username = 'username' #set username
+			password = '**********' #set password
+			server = smtplib.SMTP('smtp.gmail.com:587') #set smpt protocol
+			server.starttls() #start
+			server.login(username,password) #login the mail
+			server.sendmail(fromaddr, toaddrs, msg)  #sent the mail
+			server.quit() #logout mail
+			print("Completed") #completed
 		sleep(0.2)
 	except Exception as e:
 		disp.clear((255, 0, 0))
