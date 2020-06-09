@@ -112,12 +112,6 @@ def parse_ip():
             ip = ip.split('/')[0]
     return ip
 
-# run unix shell command, return as ASCII
-def run_cmd(cmd):
-    p = Popen(cmd, shell=True, stdout=PIPE)
-    output = p.communicate()[0]
-    return output.decode('ascii')
-
 # wipe LCD screen before we start
 
 
