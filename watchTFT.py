@@ -25,14 +25,14 @@ DC = 18  #Connection Raspberry pi Pin 18 to TFT
 RST = 23  #Connection Raspberry pi Pin 23 to TFT
 SPI_PORT = 0  #Connection Raspberry pi SPI to TFT
 SPI_DEVICE = 0  #Connection Raspberry pi SPI to TFT
-GPIO.setmode(GPIO.BCM) #Enable BCm mode for raspberry pi for read and write the values in circuit
+GPIO.setmode(GPIO.BCM) #Enable BCM mode for raspberry pi for read and write the values in circuit
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Enabling push button
  
  
 # Create TFT LCD display class.
 disp = TFT.ILI9341(DC, rst=RST, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=64000000))
  
-# Initialize display.
+# Initialize TFT display for show the Contents.
 disp.begin()
 disp.clear((255, 0, 0))
 draw = disp.draw()
