@@ -1,19 +1,16 @@
 import smtplib # import SMTP protocol
 import RPi.GPIO as GPIO # Enable Gpio port
-from subprocess import Popen, PIPE
-from time import sleep
-from datetime import datetime
-import board
-import digitalio
-from time import sleep
-import time
+from subprocess import Popen, PIPE #Import mail
+from time import sleep #import time
+from datetime import datetime #import datetime
+import board #import raspberry pi board
+import digitalio #Import digital
 import picamera #Import Camera
-import Adafruit_ADS1x15
-import Image
-import ImageDraw
-import ImageFont
+import Image #import image
+import ImageDraw #import ImageDraw
+import ImageFont #import ImageFont
  
-import Adafruit_ILI9341 as TFT
+import Adafruit_ILI9341 as TFT 
 import Adafruit_GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 
