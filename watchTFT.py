@@ -12,29 +12,22 @@ import ImageFont #import ImageFont
  
 import Adafruit_ILI9341 as TFT # Import TFT Display
 import Adafruit_GPIO as GPIO # Import GPIO for Enabling TFT Display
-import Adafruit_GPIO.SPI as SPI # Import GPIO.SPI for enable circut connection
+import Adafruit_GPIO.SPI as SPI # Import GPIO.SPI for enable circuit connection
 
 import serial #Enable Serial Communication
 
-SERIAL_PORT = "/dev/serial0"
-running = True	
-gps = serial.Serial(SERIAL_PORT, baudrate = 9600, timeout = 0.5)
+SERIAL_PORT = "/dev/serial0" # Set TX and RX Serial communication
+running = True	#Status Set as true for intial setup
+gps = serial.Serial(SERIAL_PORT, baudrate = 9600, timeout = 0.5) #Set TFT display baudrate
  
 # Raspberry Pi configuration.
-DC = 18
-RST = 23
-SPI_PORT = 0
-SPI_DEVICE = 0
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GAIN = 1
-pin = 4
+DC = 18  #Connection Raspberry pi Pin 18 to TFT
+RST = 23  #Connection Raspberry pi Pin 23 to TFT
+SPI_PORT = 0  #Connection Raspberry pi SPI to TFT
+SPI_DEVICE = 0  #Connection Raspberry pi SPI to TFT
+GPIO.setmode(GPIO.BCM) #Enable BCm mode for raspberry pi for read and write the values in circuit
+GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP) #Enabling push button
  
-# BeagleBone Black configuration.
-# DC = 'P9_15'
-# RST = 'P9_12'
-# SPI_PORT = 1
-# SPI_DEVICE = 0
  
 # Create TFT LCD display class.
 disp = TFT.ILI9341(DC, rst=RST, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=64000000))
