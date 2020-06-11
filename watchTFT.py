@@ -94,6 +94,7 @@ def readData(): #Take video and sent Email
 			server.login(username,password) #login the mail
 			server.sendmail(fromaddr, toaddrs, msg)  #sent the mail
 			server.quit() #logout mail
+			TakeVideo()
 			print("Completed") #completed
 		sleep(0.2)
 	except Exception as e:
