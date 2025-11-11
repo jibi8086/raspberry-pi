@@ -9,7 +9,7 @@ if HeartBeat>200 or TempValue>35:
 	toaddrs  = 'jibin8086@gmail.com'
 	msg = 'raspberry pi test mail'
 	username = 'smarthealth911@gmail.com'
-	password = 'smartadmin'
+	password = '****'
 	server = smtplib.SMTP('smtp.gmail.com:587')
 	server.starttls()
 	server.login(username,password)
