@@ -62,7 +62,7 @@ def readData():
 			toaddrs = 'dhavoodnassar98@gmail.com'
 			msg = "Hi,\n Your friend Dhavood health Report critical report given below \n\n Name:Dhavood \n Status:Critical\n HeartBeat:"+str(pulseFinal)+"\n Temperature:"+str(temp)+"\n\n With thanks and regards\n Smart Watch Team"
 			username = 'jibin8087@gmail.com'
-			password = '8086747217'
+			password = '*******'
 			server = smtplib.SMTP('smtp.gmail.com:587')
 			server.starttls()
 			server.login(username,password)
